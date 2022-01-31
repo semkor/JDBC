@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.util.Date;
 // 1. DB driver                     - драйвер базы данных
 // 2. create connection             - создаем соединение
 // 3. create query                  - создаем запрос
@@ -22,11 +23,37 @@ public class JDBCFirstStep {
                 return;
             }
 
-            try (ResultSet resultSet = statement.executeQuery("SELECT * FROM TEST")) {
+            try (ResultSet resultSet = statement.executeQuery("SELECT * FROM ORDERS")) {
                 while (resultSet.next()) {
-                    System.out.println("Object found");
+//пример 1 - получение данных из БД
+                    //System.out.println(resultSet.getInt(1));
+                    //System.out.println(resultSet.getString(2));
+                    //System.out.println(resultSet.getInt(3));
+
+////пример 2 - мапинг данных из БД
+//                    long id=resultSet.getLong(1);
+//                    String productName = resultSet.getString(2);
+//                    int price = resultSet.getInt(3);
+//                    Date dateOrdered=resultSet.getDate(4);
+//                    Date dateConfirmed=resultSet.getDate(5);
+//                        Order order=new Order(id,productName,price,dateOrdered,dateConfirmed);
+//                        System.out.println(order);
                 }
             }
+
+////пример 3 - мапинг данных из БД  при указанных условиях
+//            try (ResultSet resultSet = statement.executeQuery("SELECT * FROM ORDERS WHERE PRICE >240")) {
+//                while (resultSet.next()) {
+//
+//                    long id=resultSet.getLong(1);
+//                    String productName = resultSet.getString(2);
+//                    int price = resultSet.getInt(3);
+//                    Date dateOrdered=resultSet.getDate(4);
+//                    Date dateConfirmed=resultSet.getDate(5);
+//                    Order order=new Order(id,productName,price,dateOrdered,dateConfirmed);
+//                    System.out.println(order);
+//                }
+//            }
 
         } catch (SQLException e) {
             System.out.println("Something  went wrong");
