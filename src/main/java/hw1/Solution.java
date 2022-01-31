@@ -8,18 +8,21 @@ public class Solution {
     private static final String PASS = "1291328diMA";
 
     public static void main(String[] args) {
-        try {
-            getAllProducts();
-            getProductsByPrice();
-            getProductsByDescription();
-        } catch (SQLException e) {
-            System.out.println("Something  went wrong");
-            e.printStackTrace();
-        }
+//первая часть
+//        getAllProducts();
+//        getProductsByPrice();
+//        getProductsByDescription();
+
+//вторая часть
+        saveProduct();
+        deleteProducts();
+        deleteProductsByPrice();
 
     }
 
-    private static void getAllProducts() throws SQLException {
+//------------------------------------------------ 1 часть ------------------------------------------------------------
+
+    private static void getAllProducts() {
         try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS); Statement statement = connection.createStatement()) {
             try (ResultSet resultSet = statement.executeQuery("SELECT * FROM PRODUCTM")) {
                 while (resultSet.next()) {
@@ -53,6 +56,38 @@ public class Solution {
                     System.out.println(resultSet.getString(2));
                 }
             }
+        } catch (SQLException e) {
+            System.out.println("Something  went wrong");
+            e.printStackTrace();
+        }
+    }
+
+//------------------------------------------------ 2 часть ------------------------------------------------------------
+
+    private static void saveProduct() {
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS); Statement statement = connection.createStatement()) {
+            int response = statement.executeUpdate("INSERT INTO PRODUCTM VALUES (999,'toy','for children',60)");
+            System.out.println(response);
+        } catch (SQLException e) {
+            System.out.println("Something  went wrong");
+            e.printStackTrace();
+        }
+    }
+
+    private static void deleteProducts() {
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS); Statement statement = connection.createStatement()) {
+            int response = statement.executeUpdate("DELETE FROM PRODUCTM WHERE NAME != 'toy'");
+            System.out.println(response);
+        } catch (SQLException e) {
+            System.out.println("Something  went wrong");
+            e.printStackTrace();
+        }
+    }
+
+    private static void deleteProductsByPrice() {
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS); Statement statement = connection.createStatement()) {
+            int response = statement.executeUpdate("DELETE FROM PRODUCTM WHERE PRICE < 100");
+            System.out.println(response);
         } catch (SQLException e) {
             System.out.println("Something  went wrong");
             e.printStackTrace();
