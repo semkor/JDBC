@@ -1,4 +1,4 @@
-package hw1;
+package lesson1and2.hw1;
 
 import java.sql.*;
 

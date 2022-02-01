@@ -1,3 +1,5 @@
+package lesson1and2;
+
 import java.sql.*;
 import java.util.Date;
 // 1. DB driver                     - драйвер базы данных
@@ -36,7 +38,7 @@ public class JDBCFirstStep {
 //                    int price = resultSet.getInt(3);
 //                    Date dateOrdered=resultSet.getDate(4);
 //                    Date dateConfirmed=resultSet.getDate(5);
-//                        Order order=new Order(id,productName,price,dateOrdered,dateConfirmed);
+//                        lesson1and2.Order order=new lesson1and2.Order(id,productName,price,dateOrdered,dateConfirmed);
 //                        System.out.println(order);
                 }
             }
@@ -50,7 +52,7 @@ public class JDBCFirstStep {
 //                    int price = resultSet.getInt(3);
 //                    Date dateOrdered=resultSet.getDate(4);
 //                    Date dateConfirmed=resultSet.getDate(5);
-//                    Order order=new Order(id,productName,price,dateOrdered,dateConfirmed);
+//                    lesson1and2.Order order=new lesson1and2.Order(id,productName,price,dateOrdered,dateConfirmed);
 //                    System.out.println(order);
 //                }
 //            }
