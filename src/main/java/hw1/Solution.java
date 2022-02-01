@@ -9,14 +9,18 @@ public class Solution {
 
     public static void main(String[] args) {
 //первая часть
-//        getAllProducts();
-//        getProductsByPrice();
-//        getProductsByDescription();
+        getAllProducts();
+        getProductsByPrice();
+        getProductsByDescription();
 
 //вторая часть
         saveProduct();
         deleteProducts();
         deleteProductsByPrice();
+
+//третья часть
+        increasePrice();
+        changeDescription();
 
     }
 
@@ -90,6 +94,27 @@ public class Solution {
             System.out.println(response);
         } catch (SQLException e) {
             System.out.println("Something  went wrong");
+            e.printStackTrace();
+        }
+    }
+
+//------------------------------------------------ 3 часть ------------------------------------------------------------
+    private static void increasePrice() {
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS); Statement statement = connection.createStatement()) {
+            int response = statement.executeUpdate("UPDATE PRODUCTM SET PRICE = PRICE + 100 WHERE PRICE < 970");
+            System.out.println(response);
+        } catch (SQLException e) {
+            System.out.println("Something  went wrong");
+            e.printStackTrace();
+        }
+    }
+
+    private static void changeDescription() {
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS); Statement statement = connection.createStatement()) {
+            int response = statement.executeUpdate("UPDATE PRODUCTM SET DESCRIPTON = CONCAT(SUBSTRING_INDEX (DESCRIPTON, '. ',2),'.') WHERE LENGTH (DESCRIPTON) > 50");
+            System.out.println(response);
+        } catch (SQLException e) {
+            System.out.println("Something  went  wrong");
             e.printStackTrace();
         }
     }
