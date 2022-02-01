@@ -111,7 +111,7 @@ public class Solution {
 
     private static void changeDescription() {
         try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS); Statement statement = connection.createStatement()) {
-            int response = statement.executeUpdate("UPDATE PRODUCTM SET DESCRIPTON = CONCAT(SUBSTRING_INDEX (DESCRIPTON, '. ',2),'.') WHERE LENGTH (DESCRIPTON) > 50");
+            int response = statement.executeUpdate("UPDATE PRODUCTM SET DESCRIPTON = CONCAT(SUBSTRING_INDEX (DESCRIPTON, '. ',2),'.') WHERE LENGTH (DESCRIPTON) > 100");
             System.out.println(response);
         } catch (SQLException e) {
             System.out.println("Something  went  wrong");
