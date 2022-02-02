@@ -9,11 +9,11 @@ public class Demo {
 
 
 //поиск по имени
-        System.out.println(solution.findProductsByName("toy"));
+//        System.out.println(solution.findProductsByName("toy"));
 
 
 //поиск продкутов с пустым описанием
-//        System.out.println(solution.findProductsWithEmptyDescription());
+        System.out.println(solution.findProductsWithEmptyDescription());
 
     }
 }

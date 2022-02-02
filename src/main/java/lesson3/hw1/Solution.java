@@ -83,6 +83,7 @@ public class Solution {
                 Product product = new Product(resultSet.getLong(1), resultSet.getString(2), resultSet.getString(3), resultSet.getInt(4));
                 products.add(product);
             }
+
             return products;
         } catch (SQLException e) {
             System.out.println("Something  went wrong");
