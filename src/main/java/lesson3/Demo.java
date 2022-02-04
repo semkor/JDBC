@@ -9,12 +9,12 @@ public class Demo {
 //        productDAO.save(product);
 
 //read DB
-//        System.out.println(productDAO.getProducts());
+        System.out.println(productDAO.getProducts());
 
 //update DB
 //        System.out.println(productDAO.getProducts());
 
 //delete DB
-        System.out.println(productDAO.update(new Product(61, "testNEW", "test descriptionNEW", 109)));
+//        System.out.println(productDAO.update(new Product(61, "testNEW", "test descriptionNEW", 109)));
     }
 }

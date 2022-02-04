@@ -32,7 +32,6 @@ public class ProductDAO {               //CRUD - (create(save), read (select), u
         try (Connection connection = getConnection ();
              Statement statement = connection.createStatement()) {
 
-
             ResultSet resultSet=statement.executeQuery("SELECT * FROM PRODUCTM");
             List<Product> products=new ArrayList<>();
             while (resultSet.next()){
