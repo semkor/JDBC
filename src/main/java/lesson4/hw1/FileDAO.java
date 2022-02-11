@@ -120,7 +120,6 @@ public class FileDAO {
         }
     }
 
-
     public static void delete(long id, String sql) {
         try (Connection connection = getConnection();
              PreparedStatement prepareStatement = connection.prepareStatement("DELETE FROM FILE WHERE ID = ?")) {
@@ -133,7 +132,6 @@ public class FileDAO {
             e.printStackTrace();
         }
     }
-
 
     private static File getFileFromResultSet(ResultSet rs) throws SQLException {
         File file = new File(
