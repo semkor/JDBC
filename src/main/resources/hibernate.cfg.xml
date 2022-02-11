@@ -12,5 +12,6 @@
         <mapping class="bHibernate.lesson1.Product"></mapping>
         <mapping class="bHibernate.lesson1.hw1.Product"></mapping>
         <mapping class="bHibernate.lesson1.hw2.Product"></mapping>
+        <mapping class="bHibernate.lesson2.Product"></mapping>
     </session-factory>
 </hibernate-configuration>

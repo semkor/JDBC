@@ -1,12 +1,9 @@
-package bHibernate.lesson1.hw2;
+package bHibernate.lesson2;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
-@Table(name = "PRODUCT_HB1")
+@Table(name = "PRODUCTHB")
 public class Product {
     private long id;
     private String name;
@@ -23,7 +20,15 @@ public class Product {
         this.price = price;
     }
 
+    /*  если ORACLE
+            CREATE SEQUENCE PRODUCTM_SEQ MAINVALUE 1 MAXVALUE 100 START WITH 1 INCREMENT BY 2;
+            DROP SEQUENCE PRODUCTM_SEQ;
+
+            @SequenceGenerator(name="PR_SEQ",sequenceName = "PRODUCTM_SEQ",allocationSize = 1);
+            @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PR_SEQ");
+        */
     @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     public long getId() {
         return id;
