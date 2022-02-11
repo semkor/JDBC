@@ -24,7 +24,7 @@ public class Demo {
         List<Product>  products= Arrays.asList(product2, product3, product4);
 
 //        System.out.println(ProductDAO.save(product));
-//        System.out.println(ProductDAO.saveProducts(products));
+        System.out.println(ProductDAO.saveProducts(products));
 
 //        System.out.println(ProductDAO.update(new Product(33, "newToy","newFarvater",1500)));
                 Product product10=new Product(32, "new1","Farvater1",1000);
