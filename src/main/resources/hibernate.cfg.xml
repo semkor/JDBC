@@ -17,5 +17,10 @@
         <mapping class="bHibernate.lesson2.hw2.Product"></mapping>
         <mapping class="bHibernate.lesson3.Hotel"></mapping>
         <mapping class="bHibernate.lesson3.Room"></mapping>
+
+        <mapping class="bHibernate.lesson4.B_model.User"></mapping>
+        <mapping class="bHibernate.lesson4.B_model.Hotel"></mapping>
+        <mapping class="bHibernate.lesson4.B_model.Room"></mapping>
+        <mapping class="bHibernate.lesson4.B_model.Order"></mapping>
     </session-factory>
 </hibernate-configuration>

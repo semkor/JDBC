@@ -1,10 +1,6 @@
 package bHibernate.lesson3;
 
-import com.sun.istack.internal.NotNull;
-
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import java.util.Date;
 
 @Entity
@@ -16,19 +12,17 @@ public class Room {
     private int brekfastIncluded;
     private int petsAllowed;
     private Date dateAvailableFrom;
-    private Hotel hotel;
 
     public Room() {
     }
 
-    public Room(long id, int numberOfGuests, double price, int brekfastIncluded, int petsAllowed, Date dateAvailableFrom, Hotel hotel) {
+    public Room(long id, int numberOfGuests, double price, int brekfastIncluded, int petsAllowed, Date dateAvailableFrom) {
         this.id = id;
         this.numberOfGuests = numberOfGuests;
         this.price = price;
         this.brekfastIncluded = validate(brekfastIncluded, "brekfastIncluded");
         this.petsAllowed = validate(petsAllowed,"petsAllowed");
         this.dateAvailableFrom = dateAvailableFrom;
-        this.hotel = hotel;
     }
 
     @Id
@@ -63,13 +57,6 @@ public class Room {
         return dateAvailableFrom;
     }
 
-    @OneToOne (fetch = FetchType.EAGER)
-    @JoinColumn(name="HOTELS_ID")
-    public Hotel getHotel() {
-        return hotel;
-    }
-
-
     public void setId(long id) {
         this.id = id;
     }
@@ -94,11 +81,6 @@ public class Room {
         this.dateAvailableFrom = dateAvailableFrom;
     }
 
-    public void setHotel(Hotel hotel) {
-        this.hotel = hotel;
-    }
-
-
     private static int validate(int n, String str) {
         if( n!=0 && n!=1 ) {
             System.err.println(str + " - can only be 0 or 1");
@@ -116,7 +98,6 @@ public class Room {
                 ", brekfastIncluded=" + brekfastIncluded +
                 ", petsAllowed=" + petsAllowed +
                 ", dateAvailableFrom=" + dateAvailableFrom +
-                ", hotel=" + hotel +
                 '}';
     }
 }

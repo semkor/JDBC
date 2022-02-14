@@ -1,10 +1,8 @@
 package bHibernate.lesson3;
 
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.query.NativeQuery;
 
 public class RoomDAO {
     private static Session session = null;
@@ -57,10 +55,7 @@ public class RoomDAO {
             session = HotelDAO.createSessionFactory().openSession();
             tr = session.getTransaction();
             tr.begin();
-                NativeQuery nq = session.createNativeQuery(
-                        "SELECT * FROM ROOM JOIN HOTELS ON ROOM.HOTELS_ID = HOTELS.ID WHERE ROOM.ID= ?", Room.class);
-                nq.setParameter(1, id);
-            room = (Room) nq.getSingleResult();
+                room = (Room) session.get(Room.class,id);
             tr.commit();
             System.out.println("Find By ID is done");
         } catch (HibernateException e) {
@@ -75,14 +70,13 @@ public class RoomDAO {
         return room;
     }
 
-
     public static void delete(long id){
         try {
             session = HotelDAO.createSessionFactory().openSession();
             tr = session.getTransaction();
             tr.begin();
-                Room room = new Room();
-                room.setId(id);
+            Room room=(Room) session.load(Room.class,id);
+            if(room !=null)
                 session.delete(room);
             tr.commit();
             System.out.println("Delete is done");

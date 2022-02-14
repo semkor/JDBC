@@ -1,32 +1,34 @@
-package bHibernate.lesson3;
+package bHibernate.lesson4.B_model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
-@Table(name = "HOTELS")
-public class Hotel {
+@Table(name = "HOTELFPR")
+public class Hotel implements Serializable {
     private long id;
     private String name;
     private String country;
     private String city;
     private String street;
-    private Room room;
+    private List<Room> rooms;
 
     public Hotel() {
     }
 
-    public Hotel(long id, String name, String country, String city, String street, Room room) {
+    public Hotel(long id, String name, String country, String city, String street, List<Room> rooms) {
         this.id = id;
         this.name = name;
         this.country = country;
         this.city = city;
         this.street = street;
-        this.room = room;
+        this.rooms = rooms;
     }
 
+    //---------------------------------------------------- get ------------------------------------------------------------
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     public long getId() {
         return id;
@@ -36,6 +38,7 @@ public class Hotel {
     public String getName() {
         return name;
     }
+
 
     @Column(name = "COUNTRY")
     public String getCountry() {
@@ -52,12 +55,12 @@ public class Hotel {
         return street;
     }
 
-    @OneToOne (optional = false, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn (name = "ROOM_ID")
-    public Room getRoom() {
-        return room;
+    @OneToMany(mappedBy = "hotel",fetch = FetchType.EAGER,cascade = CascadeType.REMOVE, orphanRemoval = true)
+    public List<Room> getRooms() {
+        return rooms;
     }
 
+//---------------------------------------------------- set -------------------------------------------------------
     public void setId(long id) {
         this.id = id;
     }
@@ -78,10 +81,11 @@ public class Hotel {
         this.street = street;
     }
 
-    public void setRoom(Room room) {
-        this.room = room;
+    public void setRooms(List<Room> rooms) {
+        this.rooms = rooms;
     }
 
+    //---------------------------------------------------- other ---------------------------------------------------
     @Override
     public String toString() {
         return "Hotel{" +
@@ -90,7 +94,6 @@ public class Hotel {
                 ", country='" + country + '\'' +
                 ", city='" + city + '\'' +
                 ", street='" + street + '\'' +
-                ", room=" + room +
                 '}';
     }
 }

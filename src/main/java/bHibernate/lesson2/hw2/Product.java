@@ -22,7 +22,7 @@ public class Product implements Serializable {
     }
 
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     public long getId() {
         return id;
@@ -58,15 +58,5 @@ public class Product implements Serializable {
 
     public void setPrice(int price) {
         this.price = price;
-    }
-
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", price=" + price +
-                '}';
     }
 }

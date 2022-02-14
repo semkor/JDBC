@@ -44,6 +44,10 @@ public class ProductDAO {
         return product;
     }
 
+    public static void main(String[] args) {
+        System.out.println(ProductDAO.findById(45));
+    }
+
 
 //--- поиск продуктов по имени
     public static List<Product> findByName(String name) {

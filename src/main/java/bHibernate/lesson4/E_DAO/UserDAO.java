@@ -1,23 +1,26 @@
-package bHibernate.lesson3;
+package bHibernate.lesson4.E_DAO;
 
+import bHibernate.lesson4.B_model.User;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.NativeQuery;
 
-public class HotelDAO {
+import javax.persistence.NoResultException;
+
+public class UserDAO {
     private static SessionFactory sessionFactory;
     private static Session session = null;
     private static Transaction tr = null;
 
-
-    public static Hotel save(Hotel hotel){
+    public static User save(User user){
         try {
             session = createSessionFactory().openSession();
             tr = session.getTransaction();
             tr.begin();
-            session.save(hotel);
+                    session.save(user);
             tr.commit();
             System.out.println("Save is done");
         } catch (HibernateException e) {
@@ -29,19 +32,19 @@ public class HotelDAO {
             if (session != null)
                 session.close();
         }
-        return hotel;
+        return user;
     }
 
-    public static Hotel update(Hotel hotel){
+    public static User update(User user){
         try {
             session = createSessionFactory().openSession();
             tr = session.getTransaction();
             tr.begin();
-            session.update(hotel);
+                    session.update(user);
             tr.commit();
-            System.out.println("Save is done");
+            System.out.println("Update is done");
         } catch (HibernateException e) {
-            System.err.println("Save is failed");
+            System.err.println("Update is failed");
             System.out.println(e.getMessage());
             if (tr != null)
                 tr.rollback();
@@ -49,19 +52,19 @@ public class HotelDAO {
             if (session != null)
                 session.close();
         }
-        return hotel;
+        return user;
     }
 
-    public static Hotel findById(long id){
-        Hotel hotel=null;
+    public static User findById(long id){
+        User user=null;
         try {
             session = createSessionFactory().openSession();
             tr = session.getTransaction();
             tr.begin();
-                hotel = (Hotel) session.get(Hotel.class,id);
+                user = (User) session.load(User.class,id);
             tr.commit();
             System.out.println("Find By ID is done");
-        } catch (HibernateException e) {
+        } catch (HibernateException | NoResultException e) {
             System.err.println("Find By ID is failed");
             System.out.println(e.getMessage());
             if (tr != null)
@@ -70,7 +73,32 @@ public class HotelDAO {
             if (session != null)
                 session.close();
         }
-        return hotel;
+        return user;
+    }
+
+    public static User findById(String name, String password){
+        User user=null;
+        try {
+            session = createSessionFactory().openSession();
+            tr = session.getTransaction();
+            tr.begin();
+                    NativeQuery nq = session.createNativeQuery(
+                    "SELECT * FROM USERFPR WHERE BINARY USER_NAME = :nameParam AND BINARY PASSWORD = :passwordParam ", User.class);
+                    nq.setParameter("nameParam", name);
+                    nq.setParameter("passwordParam", password);
+                    user = (User) nq.getSingleResult();
+            tr.commit();
+            System.out.println("Find By ID is done");
+        } catch (HibernateException | NoResultException e) {
+            System.err.println("Find By ID is failed");
+            System.out.println(e.getMessage());
+            if (tr != null)
+                tr.rollback();
+        } finally {
+            if (session != null)
+                session.close();
+        }
+        return user;
     }
 
     public static void delete(long id){
@@ -78,9 +106,9 @@ public class HotelDAO {
             session = createSessionFactory().openSession();
             tr = session.getTransaction();
             tr.begin();
-            Hotel hotel=(Hotel) session.load(Hotel.class,id);
-            if(hotel !=null)
-                session.delete(hotel);
+                User user = new User();
+                user.setId(id);
+                session.delete(user);
             tr.commit();
             System.out.println("Delete is done");
         } catch (HibernateException e) {
@@ -101,3 +129,4 @@ public class HotelDAO {
         return sessionFactory;
     }
 }
+
