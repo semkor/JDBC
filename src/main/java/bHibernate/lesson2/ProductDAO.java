@@ -102,9 +102,9 @@ public class ProductDAO {
             session = createSessionFactory().openSession();
             tr = session.getTransaction();
             tr.begin();
-            Product product = new Product();
-                product.setId(id);
-            session.delete(product);
+            Product product=(Product) session.get(Product.class,id);
+            if(product !=null)
+                session.delete(product);
             tr.commit();
             System.out.println("Delete is done");
         } catch (HibernateException e) {
@@ -124,9 +124,9 @@ public class ProductDAO {
             tr = session.getTransaction();
             tr.begin();
             for (Product el:products) {
-                Product product = new Product();
-                    product.setId(el.getId());
-                session.delete(product);
+                Product product=(Product) session.get(Product.class,el.getId());
+                if(product !=null)
+                    session.delete(product);
             }
             tr.commit();
             System.out.println("Delete is done");

@@ -27,13 +27,12 @@ public class Demo {
         System.out.println(ProductDAO.saveProducts(products));
 
 //        System.out.println(ProductDAO.update(new Product(33, "newToy","newFarvater",1500)));
-                Product product10=new Product(32, "new1","Farvater1",1000);
-                Product product11=new Product(33, "new2","Farvater2",1050);
-                Product product12=new Product(34, "new3","Farvater3",1100);
-            List<Product>  productss= Arrays.asList(product10, product11, product12);
+                Product product10=new Product(41, "aToy333","LonfFarm",179);
+                Product product11=new Product(42, "zToy444","FromRoom",220);
+            List<Product>  productss= Arrays.asList(product10, product11);
 //        System.out.println(ProductDAO.updateAll(productss));
-//
-//        ProductDAO.delete(35);
-//        ProductDAO.deleteAll(productss);
+
+//        ProductDAO.delete(45);
+        ProductDAO.deleteAll(productss);
     }
 }
