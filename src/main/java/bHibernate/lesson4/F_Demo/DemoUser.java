@@ -26,15 +26,15 @@ public class DemoUser {
 //        System.out.println(UserService.getUserType());
 
 //-----------------удаление юзера
-//            UserDAO.delete(13);
+//            UserDAO.delete(29);
 
 //-----------------сохранение юзера
 //            User user=new User();
-//                user.setUserName("lorkueu");
-//                user.setPassword("28595AI*");
-//                user.setCountry("Korea");
-//                user.setUserType(UserType.USER);
-//            UserDAO.save(user);
+//        user.setUserName("lorkueu");
+//        user.setPassword("28595AI*");
+//        user.setCountry("Korea");
+//        user.setUserType(UserType.USER);
+//        UserDAO.save(user);
 
 //---------------------------------------------------- 2 блок ---------------------------------------------------------
 //регистрация  юзера - пустые значения

@@ -10,24 +10,24 @@ import java.util.Map;
 
 public class UserService {
     private static boolean statusActive = false;
-    private static UserType userType=UserType.USER;
+    private static UserType userType = UserType.USER;
     private static UserDAO userDAO = new UserDAO();
 
 
     public static void login(String UserName, String password) {
         try {
             validateUser(UserName, password, "");
-            User user= userDAO.findById(UserName, password);
-            if(user == null)
+            User user = userDAO.findById(UserName, password);
+            if (user == null)
                 throw new BadRequestException("Incorrect login or password");
             statusActive = true;
-            userType=user.getUserType();
+            userType = user.getUserType();
         } catch (BadRequestException e) {
             System.err.println("Error: " + e.getMessage());
         }
     }
 
-    public static User registerUser(User user) {;
+    public static User registerUser(User user) {
         try {
             validateUser(user.getUserName(), user.getPassword(), user.getCountry());
             return userDAO.save(user);
@@ -39,21 +39,23 @@ public class UserService {
 
     public static void logout() {
         statusActive = false;
-        userType=UserType.USER;
+        userType = UserType.USER;
         System.out.println("Waiting again. Bye bye!!!");
     }
 
-///----------------------------------------------------- other -------------------------------------------------
+//----------------------------------------------------- other -------------------------------------------------
     public static boolean isStatus() {
         return statusActive;
     }
 
-    public static UserType getUserType() {
-        return userType;
+    public static boolean validateStatus() {
+        if (statusActive && userType == UserType.ADMIN)
+            return true;
+        return false;
     }
 
     private static void validateUser(String name, String password, String country) throws BadRequestException {
         if (name == null || password == null || country == null)
-                throw new BadRequestException("Fields must not be empty");
+            throw new BadRequestException("Fields must not be empty");
     }
 }

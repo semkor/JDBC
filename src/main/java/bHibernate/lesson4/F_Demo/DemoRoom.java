@@ -39,18 +39,13 @@ public class DemoRoom {
 //        System.out.println(RoomController.addRoom(room));
 
 // обновление комнаты
-        Hotel hotel2=new Hotel();
-        hotel2.setId(27);
+//        Hotel hotel2=new Hotel();
+//        hotel2.setId(27);
 //        System.out.println(RoomDAO.update(new Room(30,3,159.25,true,false,new Date(),hotel2)));
 
 // --------------------------------------------- 3 блок -----------------------------------------------------
-// удаление комнаты (не делал - проверку есть такая комната или нет, так как нужны дополнительные парамметры
-//        RoomController.deleteRoom(4000000063l);
-//
-//        UserController.login("lorder","34592");
-//        RoomController.deleteRoom(4000000063l);
-//
-//        UserController.login("frolov","aD12345*");
-//        RoomController.deleteRoom(4000000075l);
+//        UserController.login("krom456","12323FiRA");
+//        RoomDAO.delete(26);
+
     }
 }

@@ -10,7 +10,7 @@ public class OrderController {
         orderService.bookRoom(userId,roomId,dateFrom,dateTo,moneyPaid);
     }
 
-    public static void cancelReservation(long userId,long roomId,Date dateFrom, Date dateTo){
-        orderService.cancelReservation(userId,roomId,dateFrom,dateTo);
+    public static void cancelReservation(long userId,long roomId){
+        orderService.cancelReservation(userId,roomId);
     }
 }

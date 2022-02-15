@@ -1,5 +1,8 @@
 package bHibernate.lesson4.E_DAO;
 
+import bHibernate.lesson4.B_model.ENUM.UserType;
+import bHibernate.lesson4.B_model.Hotel;
+import bHibernate.lesson4.B_model.Room;
 import bHibernate.lesson4.B_model.User;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -55,26 +58,6 @@ public class UserDAO {
         return user;
     }
 
-    public static User findById(long id){
-        User user=null;
-        try {
-            session = createSessionFactory().openSession();
-            tr = session.getTransaction();
-            tr.begin();
-                user = (User) session.load(User.class,id);
-            tr.commit();
-            System.out.println("Find By ID is done");
-        } catch (HibernateException | NoResultException e) {
-            System.err.println("Find By ID is failed");
-            System.out.println(e.getMessage());
-            if (tr != null)
-                tr.rollback();
-        } finally {
-            if (session != null)
-                session.close();
-        }
-        return user;
-    }
 
     public static User findById(String name, String password){
         User user=null;
@@ -101,14 +84,35 @@ public class UserDAO {
         return user;
     }
 
+    public static User findById(long id){
+        User user=null;
+        try {
+            session = createSessionFactory().openSession();
+            tr = session.getTransaction();
+            tr.begin();
+            user = (User) session.load(User.class,id);
+            tr.commit();
+            System.out.println("Find By ID is done");
+        } catch (HibernateException | NoResultException e) {
+            System.err.println("Find By ID is failed");
+            System.out.println(e.getMessage());
+            if (tr != null)
+                tr.rollback();
+        } finally {
+            if (session != null)
+                session.close();
+        }
+        return user;
+    }
+
     public static void delete(long id){
         try {
             session = createSessionFactory().openSession();
             tr = session.getTransaction();
             tr.begin();
-                User user = new User();
-                user.setId(id);
-                session.delete(user);
+                User user = (User) session.get(User.class,id);
+                if (user != null)
+                    session.delete(user);
             tr.commit();
             System.out.println("Delete is done");
         } catch (HibernateException e) {

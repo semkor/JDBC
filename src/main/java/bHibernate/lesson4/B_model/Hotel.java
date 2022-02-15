@@ -39,7 +39,6 @@ public class Hotel implements Serializable {
         return name;
     }
 
-
     @Column(name = "COUNTRY")
     public String getCountry() {
         return country;
@@ -55,7 +54,7 @@ public class Hotel implements Serializable {
         return street;
     }
 
-    @OneToMany(mappedBy = "hotel",fetch = FetchType.EAGER,cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToMany (mappedBy = "hotel", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     public List<Room> getRooms() {
         return rooms;
     }
@@ -86,6 +85,7 @@ public class Hotel implements Serializable {
     }
 
     //---------------------------------------------------- other ---------------------------------------------------
+
     @Override
     public String toString() {
         return "Hotel{" +

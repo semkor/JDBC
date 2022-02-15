@@ -34,13 +34,13 @@ public class Order {
         return id;
     }
 
-    @ManyToOne (optional = false,cascade = CascadeType.ALL)
-    @JoinColumn(name = "USERFPR_ID")                       //не уверен
+    @ManyToOne
+    @JoinColumn(name = "USERFPR_ID")
     public User getUser() {
         return user;
     }
 
-    @OneToOne (fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn (name = "ROOMFPR_ID")
     public Room getRoom() {
         return room;

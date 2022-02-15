@@ -78,13 +78,13 @@ public class HotelDAO {
         return hotel;
     }
 
-    public static Hotel findByFourParam(String name, String country, String city, String street){
+    public static Hotel findById(long id){
         Hotel hotel=null;
         try {
             session = sessionFactory.openSession();
             tr = session.getTransaction();
             tr.begin();
-                hotel = sqlQueri(name, country, city, street);
+            hotel = (Hotel) session.load(Hotel.class,id);
             tr.commit();
             System.out.println("Find By ID is done");
         } catch (HibernateException | NoResultException e) {
@@ -99,42 +99,24 @@ public class HotelDAO {
         return hotel;
     }
 
-//    public static void delete(long id){
-//        try {
-//            session = sessionFactory.openSession();
-//            tr = session.getTransaction();
-//            tr.begin();
-////                Hotel hotel = new Hotel();
-////                    hotel.setId(id);
-////                session.delete(hotel);
-//                Hotel hotel = session.load(Hotel.class,50);
-//                if (hotel != null) {
-//                    session.delete(hotel);
-//                }
-//            tr.commit();
-//            System.out.println("Delete is done");
-//        } catch (HibernateException e) {
-//            System.err.println("Delete is failed");
-//            System.out.println(e.getMessage());
-//            if (tr != null)
-//                tr.rollback();
-//        } finally {
-//            if (session != null)
-//                session.close();
-//        }
-//    }
-
-//-------------------------------------------------------------------------------------------------------------------
-    private static Hotel sqlQueri(String name, String country, String city, String street) {
-        NativeQuery nq = session.createNativeQuery(
-                "SELECT * FROM HOTELFPR WHERE BINARY " +
-                        "NAME = :nameParam AND BINARY COUNTRY = :countryParam " +
-                        "AND BINARY CITY = :cityParam AND BINARY STREET = :streetParam ", Hotel.class);
-        nq.setParameter("nameParam", name);
-        nq.setParameter("countryParam", country);
-        nq.setParameter("cityParam", city);
-        nq.setParameter("streetParam", street);
-        Hotel hotel = (Hotel) nq.getSingleResult();
-        return hotel;
+    public static void delete(long id){
+        try {
+            session = sessionFactory.openSession();
+            tr = session.getTransaction();
+            tr.begin();
+                Hotel hotel = session.get(Hotel.class,id);
+                if (hotel != null)
+                    session.delete(hotel);
+            tr.commit();
+            System.out.println("Delete is done");
+        } catch (HibernateException e) {
+            System.err.println("Delete is failed");
+            System.out.println(e.getMessage());
+            if (tr != null)
+                tr.rollback();
+        } finally {
+            if (session != null)
+                session.close();
+        }
     }
 }

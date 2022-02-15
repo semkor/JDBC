@@ -1,12 +1,8 @@
 package bHibernate.lesson4.B_model;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
 import javax.persistence.*;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Objects;
+import java.util.List;
 
 @Entity
 @Table(name = "ROOMFPR")
@@ -18,11 +14,12 @@ public class Room {
     private boolean petsAllowed;
     private Date dateAvailableFrom;
     private Hotel hotel;
+    private List<Order> orders;
 
     public Room() {
     }
 
-    public Room(long id, int numberOfGuests, double price, boolean breakfastIncluded, boolean petsAllowed, Date dateAvailableFrom, Hotel hotel) {
+    public Room(long id, int numberOfGuests, double price, boolean breakfastIncluded, boolean petsAllowed, Date dateAvailableFrom, Hotel hotel, List<Order> orders) {
         this.id = id;
         this.numberOfGuests = numberOfGuests;
         this.price = price;
@@ -30,9 +27,10 @@ public class Room {
         this.petsAllowed = petsAllowed;
         this.dateAvailableFrom = dateAvailableFrom;
         this.hotel = hotel;
+        this.orders = orders;
     }
 
-//---------------------------------------------------- get ------------------------------------------------------------
+    //---------------------------------------------------- get ------------------------------------------------------------
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column(name="ID")
@@ -65,13 +63,18 @@ public class Room {
         return dateAvailableFrom;
     }
 
-    @ManyToOne (optional = false, fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "HOTELFPR_ID")
     public Hotel getHotel() {
         return hotel;
     }
 
-//---------------------------------------------------- set -------------------------------------------------------
+    @OneToMany (mappedBy = "room", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    //---------------------------------------------------- set -------------------------------------------------------
     public void setId(long id) {
         this.id = id;
     }
@@ -100,7 +103,9 @@ public class Room {
         this.hotel = hotel;
     }
 
-//---------------------------------------------------- other ---------------------------------------------------
+    public void setOrders(List<Order> orders) { this.orders = orders;}
+
+    //---------------------------------------------------- other ---------------------------------------------------
 
     @Override
     public String toString() {
@@ -112,6 +117,7 @@ public class Room {
                 ", petsAllowed=" + petsAllowed +
                 ", dateAvailableFrom=" + dateAvailableFrom +
                 ", hotel=" + hotel +
+                ", orders=" + orders +
                 '}';
     }
 }

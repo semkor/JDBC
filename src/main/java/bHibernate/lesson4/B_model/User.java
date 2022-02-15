@@ -36,6 +36,7 @@ public class User {
     public long getId() {
         return id;
     }
+
     @Column(name="USER_NAME")
     public String getUserName() {
         return userName;
@@ -57,7 +58,7 @@ public class User {
         return userType;
     }
 
-    @OneToMany (mappedBy = "user", fetch = FetchType.EAGER)
+    @OneToMany (mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     public List<Order> getOrders() {
         return orders;
     }
@@ -95,6 +96,7 @@ public class User {
                 ", password='" + password + '\'' +
                 ", country='" + country + '\'' +
                 ", userType=" + userType +
+                ", orders=" + orders +
                 '}';
     }
 }

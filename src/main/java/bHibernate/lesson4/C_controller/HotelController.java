@@ -20,7 +20,7 @@ public class HotelController {
         return hotelService.addHotel(hotel);
     }
 
-//    public static void deleteHotel(long hotelId){
-//        hotelService.deleteHotel(hotelId);
-//    }
+    public static void deleteHotel(long hotelId){
+        hotelService.deleteHotel(hotelId);
+    }
 }

@@ -56,27 +56,6 @@ public class RoomDAO {
         return room;
     }
 
-    public static Room findById(long id){
-        Room room=null;
-        try {
-            session = sessionFactory.openSession();
-            tr = session.getTransaction();
-            tr.begin();
-                room = (Room) session.load(Room.class,id);
-            tr.commit();
-            System.out.println("Find By ID is done");
-        } catch (HibernateException | NoResultException e) {
-            System.err.println("Find By ID is failed");
-            System.out.println(e.getMessage());
-            if (tr != null)
-                tr.rollback();
-        } finally {
-            if (session != null)
-                session.close();
-        }
-        return room;
-    }
-
     public static List<Room> findByParam(int numberOfGuests, double price, boolean breakfastIncluded, boolean petsAllowed, String country, String city) {
         List<Room> room = null;
         try {
@@ -98,30 +77,47 @@ public class RoomDAO {
         return room;
     }
 
-//    public static void delete(long id){
-//        try {
-//            session = sessionFactory.openSession();
-//            tr = session.getTransaction();
-//            tr.begin();
-////                Hotel hotel = new Hotel();
-////                    hotel.setId(id);
-////                session.delete(hotel);
-//            Hotel hotel = session.load(Hotel.class,50);
-//            if (hotel != null) {
-//                session.delete(hotel);
-//            }
-//            tr.commit();
-//            System.out.println("Delete is done");
-//        } catch (HibernateException e) {
-//            System.err.println("Delete is failed");
-//            System.out.println(e.getMessage());
-//            if (tr != null)
-//                tr.rollback();
-//        } finally {
-//            if (session != null)
-//                session.close();
-//        }
-//    }
+    public static Room findById(long id){
+        Room room=null;
+        try {
+            session = sessionFactory.openSession();
+            tr = session.getTransaction();
+            tr.begin();
+            room = (Room) session.load(Room.class,id);
+            tr.commit();
+            System.out.println("Find By ID is done");
+        } catch (HibernateException | NoResultException e) {
+            System.err.println("Find By ID is failed");
+            System.out.println(e.getMessage());
+            if (tr != null)
+                tr.rollback();
+        } finally {
+            if (session != null)
+                session.close();
+        }
+        return room;
+    }
+
+    public static void delete(long id){
+        try {
+            session = sessionFactory.openSession();
+            tr = session.getTransaction();
+            tr.begin();
+            Room room = session.get(Room.class,id);
+            if (room != null)
+                session.delete(room);
+            tr.commit();
+            System.out.println("Delete is done");
+        } catch (HibernateException e) {
+            System.err.println("Delete is failed");
+            System.out.println(e.getMessage());
+            if (tr != null)
+                tr.rollback();
+        } finally {
+            if (session != null)
+                session.close();
+        }
+    }
 
     private static List<Room> sqlQueri(int numberOfGuests, double price, boolean breakfastIncluded, boolean petsAllowed, String country, String city) {
         List<Room> room = null;

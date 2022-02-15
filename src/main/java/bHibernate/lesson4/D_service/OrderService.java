@@ -13,8 +13,8 @@ public class OrderService {
             orderDAO.save(UserDAO.findById(userId), RoomDAO.findById(roomId), dateFrom, dateTo, moneyPaid);
     }
 
-    public static void cancelReservation(long userId, long roomId, Date dateFrom, Date dateTo) {
+    public static void cancelReservation(long userId, long roomId) {
         if (UserService.isStatus())
-            orderDAO.delete(UserDAO.findById(userId), RoomDAO.findById(roomId), dateFrom, dateTo);
+            orderDAO.delete(userId, roomId);
     }
 }

@@ -24,20 +24,15 @@ public class RoomService {
 
 //--------------------------------------------------- только для админа ---------------------------------------
     public static Room addRoom(Room room) {
-        try {
-            if (HotelService.validateUser())
-                    throw new BadRequestException("No rights or Hotel with such parameters exists");
-            RoomDAO.save(room);
-        } catch (BadRequestException e) {
-            System.err.println("Error: " + e.getMessage());
-            return null;
-        }
-        return room;
+            if (UserService.validateStatus()) {
+                RoomDAO.save(room);
+                return room;
+            }
+        return null;
     }
 
-
-//    public static void deleteRoom(long roomId) {
-//        if (UserService.isStatus() && UserService.getUserType() == UserType.ADMIN)
-//        HotelDAO.deleteToFrom(UserDAO.searchFastFromFile(Long.toString(roomId), "", "", "", fileFromPath), fileFromPath);
-//    }
+    public static void deleteRoom(long roomId) {
+        if (UserService.validateStatus())
+            roomDAO.delete(roomId);
+    }
 }

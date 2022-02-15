@@ -9,18 +9,23 @@
         <property name="hibernate.connection.username">maven</property>
         <property name="hibernate.connection.password">1291328diMA</property>
         <!--<property name="show_sql">true</property>-->
-        <mapping class="bHibernate.lesson1.Product"></mapping>
+
+        <mapping class="bHibernate.lesson4.B_model.User"></mapping>
+        <mapping class="bHibernate.lesson4.B_model.Hotel"></mapping>
+        <mapping class="bHibernate.lesson4.B_model.Room"></mapping>
+        <mapping class="bHibernate.lesson4.B_model.Order"></mapping>
+
+
+        <!-- <mapping class="bHibernate.lesson1.Product"></mapping>
         <mapping class="bHibernate.lesson1.hw1.Product"></mapping>
         <mapping class="bHibernate.lesson1.hw2.Product"></mapping>
         <mapping class="bHibernate.lesson2.Product"></mapping>
         <mapping class="bHibernate.lesson2.hw1.Product"></mapping>
         <mapping class="bHibernate.lesson2.hw2.Product"></mapping>
         <mapping class="bHibernate.lesson3.Hotel"></mapping>
-        <mapping class="bHibernate.lesson3.Room"></mapping>
+        <mapping class="bHibernate.lesson3.Room"></mapping>                  -->
 
-        <mapping class="bHibernate.lesson4.B_model.User"></mapping>
-        <mapping class="bHibernate.lesson4.B_model.Hotel"></mapping>
-        <mapping class="bHibernate.lesson4.B_model.Room"></mapping>
-        <mapping class="bHibernate.lesson4.B_model.Order"></mapping>
-    </session-factory>
+
+
+</session-factory>
 </hibernate-configuration>

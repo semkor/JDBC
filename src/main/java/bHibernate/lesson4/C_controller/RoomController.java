@@ -18,8 +18,8 @@ public class RoomController {
     public static Room addRoom(Room room) {
         return roomService.addRoom(room);
     }
-//
-//    public static void deleteRoom(long RoomId) {
-//        roomService.deleteRoom(RoomId);
-//    }
+
+    public static void deleteRoom(long RoomId) {
+        roomService.deleteRoom(RoomId);
+    }
 }
